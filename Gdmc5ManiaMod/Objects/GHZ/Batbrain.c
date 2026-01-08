@@ -42,8 +42,16 @@ void Batbrain_Create(void *data)
 
 void Batbrain_StageLoad(void)
 {
-    if (RSDK.CheckSceneFolder("GHZ"))
+    if (RSDK.CheckSceneFolder("GHZ")) {
         Batbrain->aniFrames = RSDK.LoadSpriteAnimation("GHZ/Batbrain.bin", SCOPE_STAGE);
+	}
+	// Added in More Zones to the Code for the New Zones -Gdmc5
+    else if (RSDK.CheckSceneFolder("TZ1") || RSDK.CheckSceneFolder("TZ2") || RSDK.CheckSceneFolder("TZ3") || RSDK.CheckSceneFolder("TZ4") || RSDK.CheckSceneFolder("TZ5")) {
+        Batbrain->aniFrames = RSDK.LoadSpriteAnimation("TZ1/Batbrain.bin", SCOPE_STAGE);
+	}
+    else {
+		Batbrain->aniFrames = RSDK.LoadSpriteAnimation("DZ/Batbrain.bin", SCOPE_STAGE);
+	}
 
     Batbrain->hitboxBadnik.left   = -12;
     Batbrain->hitboxBadnik.top    = -18;
@@ -215,7 +223,21 @@ void Batbrain_State_FlyToCeiling(void)
 #if GAME_INCLUDE_EDITOR
 void Batbrain_EditorDraw(void) { Batbrain_Draw(); }
 
-void Batbrain_EditorLoad(void) { Batbrain->aniFrames = RSDK.LoadSpriteAnimation("GHZ/Batbrain.bin", SCOPE_STAGE); }
+void Batbrain_EditorLoad(void)
+{
+	// Changed the EditorLoad State Code to Support Other Zone Animations and Sprites to work with the New Zones -Gdmc5
+    if (RSDK.CheckSceneFolder("GHZ")) {
+	    Batbrain->aniFrames = RSDK.LoadSpriteAnimation("GHZ/Batbrain.bin", SCOPE_STAGE);
+	}
+	// Added in More Zones to the Code for the New Zones -Gdmc5
+    else if (RSDK.CheckSceneFolder("TZ1") || RSDK.CheckSceneFolder("TZ2") || RSDK.CheckSceneFolder("TZ3") || RSDK.CheckSceneFolder("TZ4") || RSDK.CheckSceneFolder("TZ5")) {
+        Batbrain->aniFrames = RSDK.LoadSpriteAnimation("TZ/Batbrain.bin", SCOPE_STAGE);
+	}
+    else {
+        Batbrain->aniFrames = RSDK.LoadSpriteAnimation("DZ/Batbrain.bin", SCOPE_STAGE);
+	}
+}
+
 #endif
 
 void Batbrain_Serialize(void) {}

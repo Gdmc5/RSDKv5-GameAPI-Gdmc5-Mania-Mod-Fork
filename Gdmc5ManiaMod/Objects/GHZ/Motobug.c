@@ -51,10 +51,18 @@ void Motobug_Create(void *data)
 
 void Motobug_StageLoad(void)
 {
-    if (RSDK.CheckSceneFolder("GHZ"))
+    if (RSDK.CheckSceneFolder("GHZ")) {
         Motobug->aniFrames = RSDK.LoadSpriteAnimation("GHZ/Motobug.bin", SCOPE_STAGE);
-    else if (RSDK.CheckSceneFolder("Blueprint"))
+	}
+    else if (RSDK.CheckSceneFolder("Blueprint")) {
         Motobug->aniFrames = RSDK.LoadSpriteAnimation("Blueprint/Motobug.bin", SCOPE_STAGE);
+	}
+	// Added in More Zones to the Code for the New Zones -Gdmc5
+    else if (RSDK.CheckSceneFolder("TZ1") || RSDK.CheckSceneFolder("TZ2") || RSDK.CheckSceneFolder("TZ3") || RSDK.CheckSceneFolder("TZ4") || RSDK.CheckSceneFolder("TZ5")) {
+        Motobug->aniFrames = RSDK.LoadSpriteAnimation("TZ/Motobug.bin", SCOPE_STAGE);
+	}
+	else
+		Motobug->aniFrames = RSDK.LoadSpriteAnimation("DZ/Motobug.bin", SCOPE_STAGE);
 
     Motobug->hitboxBadnik.left   = -14;
     Motobug->hitboxBadnik.top    = -14;
@@ -244,10 +252,19 @@ void Motobug_EditorDraw(void) { Motobug_Draw(); }
 
 void Motobug_EditorLoad(void)
 {
-    if (RSDK.CheckSceneFolder("GHZ"))
+    if (RSDK.CheckSceneFolder("GHZ")) {
         Motobug->aniFrames = RSDK.LoadSpriteAnimation("GHZ/Motobug.bin", SCOPE_STAGE);
-    else if (RSDK.CheckSceneFolder("Blueprint"))
+	}
+    else if (RSDK.CheckSceneFolder("Blueprint")) {
         Motobug->aniFrames = RSDK.LoadSpriteAnimation("Blueprint/Motobug.bin", SCOPE_STAGE);
+	}
+	// Added in More Zones to the Code for the New Zones -Gdmc5
+    else if (RSDK.CheckSceneFolder("TZ1") || RSDK.CheckSceneFolder("TZ2") || RSDK.CheckSceneFolder("TZ3") || RSDK.CheckSceneFolder("TZ4") || RSDK.CheckSceneFolder("TZ5")) {
+        Motobug->aniFrames = RSDK.LoadSpriteAnimation("TZ/Motobug.bin", SCOPE_STAGE);
+	}
+	else {
+		Motobug->aniFrames = RSDK.LoadSpriteAnimation("DZ/Motobug.bin", SCOPE_STAGE);
+	}
 }
 #endif
 

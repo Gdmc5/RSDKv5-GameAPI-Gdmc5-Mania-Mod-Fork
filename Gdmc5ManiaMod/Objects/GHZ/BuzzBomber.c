@@ -83,10 +83,19 @@ void BuzzBomber_Create(void *data)
 
 void BuzzBomber_StageLoad(void)
 {
-    if (RSDK.CheckSceneFolder("GHZ"))
+    if (RSDK.CheckSceneFolder("GHZ")) {
         BuzzBomber->aniFrames = RSDK.LoadSpriteAnimation("GHZ/BuzzBomber.bin", SCOPE_STAGE);
-    else if (RSDK.CheckSceneFolder("Blueprint"))
+	}
+    else if (RSDK.CheckSceneFolder("Blueprint")) {
         BuzzBomber->aniFrames = RSDK.LoadSpriteAnimation("Blueprint/BuzzBomber.bin", SCOPE_STAGE);
+	}
+	// Added in More Zones to the Code for the New Zones -Gdmc5
+    else if (RSDK.CheckSceneFolder("TZ1") || RSDK.CheckSceneFolder("TZ2") || RSDK.CheckSceneFolder("TZ3") || RSDK.CheckSceneFolder("TZ4") || RSDK.CheckSceneFolder("TZ5")) {
+        BuzzBomber->aniFrames = RSDK.LoadSpriteAnimation("TZ/BuzzBomber.bin", SCOPE_STAGE);
+	}
+	else {
+        BuzzBomber->aniFrames = RSDK.LoadSpriteAnimation("DZ/BuzzBomber.bin", SCOPE_STAGE);
+	}
 
     BuzzBomber->hitboxBadnik.left   = -24;
     BuzzBomber->hitboxBadnik.top    = -12;
@@ -302,10 +311,19 @@ void BuzzBomber_EditorDraw(void)
 
 void BuzzBomber_EditorLoad(void)
 {
-    if (RSDK.CheckSceneFolder("GHZ"))
+    if (RSDK.CheckSceneFolder("GHZ")) {
         BuzzBomber->aniFrames = RSDK.LoadSpriteAnimation("GHZ/BuzzBomber.bin", SCOPE_STAGE);
-    else if (RSDK.CheckSceneFolder("Blueprint"))
+	}
+    else if (RSDK.CheckSceneFolder("Blueprint")) {
         BuzzBomber->aniFrames = RSDK.LoadSpriteAnimation("Blueprint/BuzzBomber.bin", SCOPE_STAGE);
+	}
+	// Added in More Zones to the Code for the New Zones -Gdmc5
+    else if (RSDK.CheckSceneFolder("TZ1") || RSDK.CheckSceneFolder("TZ2") || RSDK.CheckSceneFolder("TZ3") || RSDK.CheckSceneFolder("TZ4") || RSDK.CheckSceneFolder("TZ5")) {
+        BuzzBomber->aniFrames = RSDK.LoadSpriteAnimation("TZ/BuzzBomber.bin", SCOPE_STAGE);
+	}
+    else {
+        BuzzBomber->aniFrames = RSDK.LoadSpriteAnimation("DZ/BuzzBomber.bin", SCOPE_STAGE);
+	}
 
     RSDK_ACTIVE_VAR(BuzzBomber, direction);
     RSDK_ENUM_VAR("Left", FLIP_NONE);

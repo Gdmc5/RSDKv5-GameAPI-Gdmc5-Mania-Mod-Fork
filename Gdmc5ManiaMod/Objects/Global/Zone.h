@@ -31,13 +31,20 @@ typedef enum {
     ZONE_MMZ,
     ZONE_TMZ,
     ZONE_ERZ,
-#if MANIA_USE_PLUS
+	// Made Angel Island Zone ID be in Non Mania Plus Mode -Gdmc5
     ZONE_AIZ,
-#endif
+	// Added in More Zone ID's for the New Zones -Gdmc5
+	ZONE_TZ1,
+	ZONE_TZ2,
+	ZONE_TZ3,
+	ZONE_TZ4,
+	ZONE_TZ5,
+	ZONE_DZ,
     // total zone count
     ZONE_COUNT,
     // zone count for save files
-    ZONE_COUNT_SAVEFILE = ZONE_ERZ + 1,
+	// changed the ZONE_COUNT_SAVEFILE Variable to work with the New Zones above AIZ by changing it from to ZONE_ERZ +1 to ZONE_ERZ +7 -Gdmc5
+    ZONE_COUNT_SAVEFILE = ZONE_ERZ + 7,
 } ZoneIDs;
 
 // Object Class
@@ -82,9 +89,8 @@ struct ObjectZone {
     uint16 collisionLayers;
     uint16 fgLayer[2]; // { lowPriority, highPriority }
     uint16 moveLayer;
-#if MANIA_USE_PLUS
+	// Removed the #if MANIA_USE_PLUS Statements so it works in Non Mania Plus Mode -Gdmc5
     uint16 scratchLayer;
-#endif
     uint16 fgLayerMask[2]; // { lowPriority, highPriority }
     uint16 moveLayerMask;
     uint8 fgDrawGroup[2];     // { lowPriority, highPriority }
@@ -153,8 +159,9 @@ void Zone_ApplyWorldBounds(void);
 bool32 Zone_IsZoneLastAct(void);
 #if MANIA_USE_PLUS
 int32 Zone_GetListPos_EncoreMode(void);
-int32 Zone_GetListPos_ManiaMode(void);
+// Changed this to where it gets Mania Mode's Zone List Postion in Non Mania Plus Mode -Gdmc5
 #endif
+int32 Zone_GetListPos_ManiaMode(void);
 
 // Draw States
 void Zone_Draw_Fade(void);
@@ -163,10 +170,9 @@ void Zone_Draw_Fade(void);
 void Zone_State_FadeOut(void);
 void Zone_State_FadeIn(void);
 void Zone_State_FadeOut_Competition(void);
-#if MANIA_USE_PLUS
+// Removed #if MANIA_USE_PLUS Statements from this where it works in Non Mania Plus Mode -Gdmc5
 void Zone_TitleCard_SupressCB(void);
 void Zone_State_ReloadScene(void);
-#endif
 void Zone_State_FadeOut_Destroy(void);
 void Zone_HandlePlayerSwap(void);
 void Zone_State_SwapPlayers(void);

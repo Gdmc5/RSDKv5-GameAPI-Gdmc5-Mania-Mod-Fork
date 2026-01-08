@@ -7,7 +7,7 @@
 
 #include "Game.h"
 
-#if !MANIA_USE_PLUS
+// Added this Object to Post Mania Plus by Removing the if not Mania Plus Statement -Gdmc5
 ObjectE3MenuSetup *E3MenuSetup = NULL;
 
 void E3MenuSetup_Update(void)
@@ -200,4 +200,3 @@ void E3MenuSetup_EditorLoad(void) {}
 #endif
 
 void E3MenuSetup_Serialize(void) {}
-#endif

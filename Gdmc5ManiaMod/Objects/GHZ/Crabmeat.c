@@ -56,8 +56,16 @@ void Crabmeat_Create(void *data)
 
 void Crabmeat_StageLoad(void)
 {
-    if (RSDK.CheckSceneFolder("GHZ"))
+    if (RSDK.CheckSceneFolder("GHZ")) {
         Crabmeat->aniFrames = RSDK.LoadSpriteAnimation("GHZ/Crabmeat.bin", SCOPE_STAGE);
+	}
+	// Added in More Zones to the Code for the New Zones -Gdmc5
+    else if (RSDK.CheckSceneFolder("TZ1") || RSDK.CheckSceneFolder("TZ2") || RSDK.CheckSceneFolder("TZ3") || RSDK.CheckSceneFolder("TZ4") || RSDK.CheckSceneFolder("TZ5")) {
+        Crabmeat->aniFrames = RSDK.LoadSpriteAnimation("TZ/Crabmeat.bin", SCOPE_STAGE);
+	}
+	else {
+		Crabmeat->aniFrames = RSDK.LoadSpriteAnimation("DZ/Crabmeat.bin", SCOPE_STAGE);
+	}
 
     Crabmeat->hitboxBadnik.left   = -14;
     Crabmeat->hitboxBadnik.top    = -14;
@@ -209,7 +217,21 @@ void Crabmeat_State_Projectile(void)
 #if GAME_INCLUDE_EDITOR
 void Crabmeat_EditorDraw(void) { Crabmeat_Draw(); }
 
-void Crabmeat_EditorLoad(void) { Crabmeat->aniFrames = RSDK.LoadSpriteAnimation("GHZ/Crabmeat.bin", SCOPE_STAGE); }
+void Crabmeat_EditorLoad(void)
+{
+	// Changed the EditorLoad State Code to Support Other Zone Animations and Sprites to work with the New Zones -Gdmc5
+	if (RSDK.CheckSceneFolder("GHZ")) {
+        Crabmeat->aniFrames = RSDK.LoadSpriteAnimation("GHZ/Crabmeat.bin", SCOPE_STAGE);
+	}
+	// Added in More Zones to the Code for the New Zones -Gdmc5
+    else if (RSDK.CheckSceneFolder("TZ1") || RSDK.CheckSceneFolder("TZ2") || RSDK.CheckSceneFolder("TZ3") || RSDK.CheckSceneFolder("TZ4") || RSDK.CheckSceneFolder("TZ5")) {
+        Crabmeat->aniFrames = RSDK.LoadSpriteAnimation("TZ/Crabmeat.bin", SCOPE_STAGE);
+	}
+    else {
+	    Crabmeat->aniFrames = RSDK.LoadSpriteAnimation("DZ/Crabmeat.bin", SCOPE_STAGE);
+	}
+}
+
 #endif
 
 void Crabmeat_Serialize(void) {}

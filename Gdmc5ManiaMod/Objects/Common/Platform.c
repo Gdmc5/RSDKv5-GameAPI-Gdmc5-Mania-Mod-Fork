@@ -462,7 +462,26 @@ void Platform_StageLoad(void)
     else if (RSDK.CheckSceneFolder("Blueprint")) {
         Platform->aniFrames = RSDK.LoadSpriteAnimation("Blueprint/Platform.bin", SCOPE_STAGE);
     }
-
+	// Added in More Zones to the Code here of the New Zones -Gdmc5
+	else if (RSDK.CheckSceneFolder("TZ1")) {
+		Platform->aniFrames = RSDK.LoadSpriteAnimation("TZ1/Platform.bin", SCOPE_STAGE);
+	}
+	else if (RSDK.CheckSceneFolder("TZ2")) {
+		Platform->aniFrames = RSDK.LoadSpriteAnimation("TZ2/Platform.bin", SCOPE_STAGE);
+	}
+	else if (RSDK.CheckSceneFolder("TZ3")) {
+		Platform->aniFrames = RSDK.LoadSpriteAnimation("TZ3/Platform.bin", SCOPE_STAGE);
+	}
+	else if (RSDK.CheckSceneFolder("TZ4")) {
+		Platform->aniFrames = RSDK.LoadSpriteAnimation("TZ4/Platform.bin", SCOPE_STAGE);
+	}
+	else if (RSDK.CheckSceneFolder("TZ5")) {
+		Platform->aniFrames = RSDK.LoadSpriteAnimation("TZ5/Platform.bin", SCOPE_STAGE);
+	}
+	else {
+	    Platform->aniFrames = RSDK.LoadSpriteAnimation("DZ/Platform.bin", SCOPE_STAGE);
+	}
+	
     Platform->sfxClacker = RSDK.GetSfx("Stage/Clacker.wav");
     Platform->sfxClang   = RSDK.GetSfx("Stage/Clang.wav");
     Platform->sfxPush    = RSDK.GetSfx("Global/Push.wav");

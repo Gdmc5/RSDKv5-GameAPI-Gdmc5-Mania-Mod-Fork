@@ -1599,6 +1599,7 @@ void InitPublicFunctions()
     ADD_PUBLIC_FUNC(Announcer_State_AnnounceWinPlayer);
 
     // Global/APICallback
+    // Removed if Pre Plus Mania Statements and Deleted Some Code -Gdmc5
 
     // Global/BoundsMarker
     ADD_PUBLIC_FUNC(BoundsMarker_ApplyBounds);
@@ -2345,7 +2346,8 @@ void InitPublicFunctions()
     ADD_PUBLIC_FUNC(Pointdexter_State_Swimming);
 
     // HCZ/PullChain
-//    ADD_PUBLIC_FUNC(PullChain_HandleDunkeyCode);
+    // Removed if Pre Plus Mania Statements and Commented out some Code to remove it from the game without deleting it -Gdmc5
+    //ADD_PUBLIC_FUNC(PullChain_HandleDunkeyCode);
 
     // HCZ/ScrewMobile
     ADD_PUBLIC_FUNC(ScrewMobile_State_CheckPlayerEnter);
@@ -2402,12 +2404,11 @@ void InitPublicFunctions()
 
     // Helpers/CompetitionSession
     ADD_PUBLIC_FUNC(CompetitionSession_GetSession);
-#if !MANIA_USE_PLUS
-    ADD_PUBLIC_FUNC(CompetitionSession_ResetOptions);
-    ADD_PUBLIC_FUNC(CompetitionSession_ClearMatchData);
-    ADD_PUBLIC_FUNC(CompetitionSession_DeriveWinner);
-    ADD_PUBLIC_FUNC(CompetitionSession_WinMatchFor);
-#endif
+	// Removed if Pre Plus Mania Statements and Commented out some Code to remove it from the game without deleting it -Gdmc5
+    //ADD_PUBLIC_FUNC(CompetitionSession_ResetOptions);
+    //ADD_PUBLIC_FUNC(CompetitionSession_ClearMatchData);
+    //ADD_PUBLIC_FUNC(CompetitionSession_DeriveWinner);
+    //ADD_PUBLIC_FUNC(CompetitionSession_WinMatchFor);
 
     // Helpers/DrawHelpers
     ADD_PUBLIC_FUNC(DrawHelpers_DrawHitboxOutline);
@@ -3062,14 +3063,15 @@ void InitPublicFunctions()
     ADD_PUBLIC_FUNC(DemoMenu_State_Disappear);
 
     // Menu/E3MenuSetup
-    ADD_PUBLIC_FUNC(E3MenuSetup_SetupUI);
-    ADD_PUBLIC_FUNC(E3MenuSetup_SetupButtons);
-    ADD_PUBLIC_FUNC(E3MenuSetup_Callback_LoadScene);
-    ADD_PUBLIC_FUNC(E3MenuSetup_ActionCB_ZoneSelect);
-    ADD_PUBLIC_FUNC(E3MenuSetup_ActionCB_Sonic);
-    ADD_PUBLIC_FUNC(E3MenuSetup_ActionCB_Tails);
-    ADD_PUBLIC_FUNC(E3MenuSetup_ActionCB_Knux);
-    ADD_PUBLIC_FUNC(E3MenuSetup_State_FadeOut);
+	// Removed if Pre Plus Mania Statements and Commented out some Code to remove it from the game without deleting it -Gdmc5
+    //ADD_PUBLIC_FUNC(E3MenuSetup_SetupUI);
+    //ADD_PUBLIC_FUNC(E3MenuSetup_SetupButtons);
+    //ADD_PUBLIC_FUNC(E3MenuSetup_Callback_LoadScene);
+    //ADD_PUBLIC_FUNC(E3MenuSetup_ActionCB_ZoneSelect);
+    //ADD_PUBLIC_FUNC(E3MenuSetup_ActionCB_Sonic);
+    //ADD_PUBLIC_FUNC(E3MenuSetup_ActionCB_Tails);
+    //ADD_PUBLIC_FUNC(E3MenuSetup_ActionCB_Knux);
+    //ADD_PUBLIC_FUNC(E3MenuSetup_State_FadeOut);
 
     // Menu/ExtrasMenu
     ADD_PUBLIC_FUNC(ExtrasMenu_Initialize);
@@ -5644,11 +5646,10 @@ void InitPublicFunctions()
     ADD_PUBLIC_FUNC(MetalSonic_ProcessBGParallax);
     ADD_PUBLIC_FUNC(MetalSonic_HandleVelocity);
     ADD_PUBLIC_FUNC(MetalSonic_HandleAnimDir);
-#if !MANIA_USE_PLUS
-    ADD_PUBLIC_FUNC(MetalSonic_CheckPlayerCollisions);
-    ADD_PUBLIC_FUNC(MetalSonic_Hit);
-    ADD_PUBLIC_FUNC(MetalSonic_Explode);
-#endif
+    // Removed if Pre Plus Mania Statements and Commented out some Code to remove it from the game without deleting it -Gdmc5
+    //ADD_PUBLIC_FUNC(MetalSonic_CheckPlayerCollisions);
+    //ADD_PUBLIC_FUNC(MetalSonic_Hit);
+    //ADD_PUBLIC_FUNC(MetalSonic_Explode);
     ADD_PUBLIC_FUNC(MetalSonic_State_SetupArena);
     ADD_PUBLIC_FUNC(MetalSonic_State_AwaitPlayer);
     ADD_PUBLIC_FUNC(MetalSonic_State_WaitForHologram);
@@ -5682,27 +5683,28 @@ void InitPublicFunctions()
     ADD_PUBLIC_FUNC(MetalSonic_State_Transform);
     ADD_PUBLIC_FUNC(MetalSonic_State_Defeated);
 // Phase 3 (VS Metal Sonic)
-    ADD_PUBLIC_FUNC(MetalSonic_State_SetupSpikeWall);
-    ADD_PUBLIC_FUNC(MetalSonic_State_FlyToSpikeWall);
-    ADD_PUBLIC_FUNC(MetalSonic_State_LandNearSpikeWall);
-    ADD_PUBLIC_FUNC(MetalSonic_State_Taunt_Phase2);
-    ADD_PUBLIC_FUNC(MetalSonic_State_Ready_Phase2);
-    ADD_PUBLIC_FUNC(MetalSonic_State_StartSpikeWallMovement);
-    ADD_PUBLIC_FUNC(MetalSonic_State_AccelerateSpikeWall);
-    ADD_PUBLIC_FUNC(MetalSonic_State_Hover_Phase2);
-    ADD_PUBLIC_FUNC(MetalSonic_State_SetupBallAttack_Phase2);
-    ADD_PUBLIC_FUNC(MetalSonic_State_BallAttack_Phase2);
-    ADD_PUBLIC_FUNC(MetalSonic_State_FinishAttack_Phase2);
-    ADD_PUBLIC_FUNC(MetalSonic_State_SetupElectricAttack_Phase2);
-    ADD_PUBLIC_FUNC(MetalSonic_State_StartElectricAttack_Phase2);
-    ADD_PUBLIC_FUNC(MetalSonic_State_ElectricAttack_Phase2);
-    ADD_PUBLIC_FUNC(MetalSonic_State_DashAttack_Phase2);
-    ADD_PUBLIC_FUNC(MetalSonic_State_Explode);
-    ADD_PUBLIC_FUNC(MetalSonic_State_Defeated);
-    ADD_PUBLIC_FUNC(MetalSonic_State_Finish);
-    ADD_PUBLIC_FUNC(MetalSonic_State_None);
-    ADD_PUBLIC_FUNC(MetalSonic_StateWall_Fall);
-    ADD_PUBLIC_FUNC(MetalSonic_StateWall_Move);
+// Removed if Pre Plus Mania Statements and Commented out some Code to remove it from the game without deleting it -Gdmc5
+    //ADD_PUBLIC_FUNC(MetalSonic_State_SetupSpikeWall);
+    //ADD_PUBLIC_FUNC(MetalSonic_State_FlyToSpikeWall);
+    //ADD_PUBLIC_FUNC(MetalSonic_State_LandNearSpikeWall);
+    //ADD_PUBLIC_FUNC(MetalSonic_State_Taunt_Phase2);
+    //ADD_PUBLIC_FUNC(MetalSonic_State_Ready_Phase2);
+    //ADD_PUBLIC_FUNC(MetalSonic_State_StartSpikeWallMovement);
+    //ADD_PUBLIC_FUNC(MetalSonic_State_AccelerateSpikeWall);
+    //ADD_PUBLIC_FUNC(MetalSonic_State_Hover_Phase2);
+    //ADD_PUBLIC_FUNC(MetalSonic_State_SetupBallAttack_Phase2);
+    //ADD_PUBLIC_FUNC(MetalSonic_State_BallAttack_Phase2);
+    //ADD_PUBLIC_FUNC(MetalSonic_State_FinishAttack_Phase2);
+    //ADD_PUBLIC_FUNC(MetalSonic_State_SetupElectricAttack_Phase2);
+    //ADD_PUBLIC_FUNC(MetalSonic_State_StartElectricAttack_Phase2);
+    //ADD_PUBLIC_FUNC(MetalSonic_State_ElectricAttack_Phase2);
+    //ADD_PUBLIC_FUNC(MetalSonic_State_DashAttack_Phase2);
+    //ADD_PUBLIC_FUNC(MetalSonic_State_Explode);
+    //ADD_PUBLIC_FUNC(MetalSonic_State_Defeated);
+    //ADD_PUBLIC_FUNC(MetalSonic_State_Finish);
+    //ADD_PUBLIC_FUNC(MetalSonic_State_None);
+    //ADD_PUBLIC_FUNC(MetalSonic_StateWall_Fall);
+    //ADD_PUBLIC_FUNC(MetalSonic_StateWall_Move);
 
     // SSZ/MSBomb
     ADD_PUBLIC_FUNC(MSBomb_State_EnterBomb);

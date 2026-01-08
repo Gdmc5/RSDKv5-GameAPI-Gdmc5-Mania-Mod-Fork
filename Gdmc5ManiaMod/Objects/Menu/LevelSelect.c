@@ -63,12 +63,11 @@ void LevelSelect_Create(void *data)
 void LevelSelect_StageLoad(void)
 {
     LevelSelect->sfxFail = RSDK.GetSfx("Stage/Fail.wav");
-#if MANIA_USE_PLUS
+// -ONLYPOSTPLUSVERSION Removed the if Mania Plus Statement since this Mod uses a Post Mania Plus Version with the DLC off if not used -Gdmc5
     LevelSelect->sfxRing     = RSDK.GetSfx("Global/Ring.wav");
     LevelSelect->sfxEmerald  = RSDK.GetSfx("Special/Emerald.wav");
     LevelSelect->sfxContinue = RSDK.GetSfx("Special/Continue.wav");
     LevelSelect->sfxMedalGot = RSDK.GetSfx("Special/MedalCaught.wav");
-#endif
 
     RSDK.ResetEntitySlot(0, LevelSelect->classID, NULL);
 
@@ -88,7 +87,7 @@ void LevelSelect_StageLoad(void)
     --LevelSelect->soundTestMax;
 
     globals->medalMods |= MEDAL_DEBUGMODE;
-#if MANIA_USE_PLUS
+// -ONLYPOSTPLUSVERSION Removed the if Mania Plus Statement since this Mod uses a Post Mania Plus Version with the DLC off if not used -Gdmc5
     LevelSelect->cheatCodePtrs[0] = LevelSelect->cheat_RickyMode;
     LevelSelect->cheatCodePtrs[1] = LevelSelect->cheat_AllEmeralds;
     LevelSelect->cheatCodePtrs[2] = LevelSelect->cheat_MaxContinues;
@@ -115,10 +114,9 @@ void LevelSelect_StageLoad(void)
     LevelSelect->cheatCodePos[5] = 0;
     LevelSelect->cheatCodePos[6] = 0;
     LevelSelect->cheatCodePos[7] = 0;
-#endif
 }
 
-#if MANIA_USE_PLUS
+// -ONLYPOSTPLUSVERSION Removed the if Mania Plus Statement since this Mod uses a Post Mania Plus Version with the DLC off if not used -Gdmc5
 void LevelSelect_Cheat_AllEmeralds(void)
 {
     Music_FadeOut(0.125);
@@ -185,7 +183,6 @@ void LevelSelect_Cheat_UnlockAllMedals(void)
         RSDK.PlaySfx(LevelSelect->sfxRing, false, 255);
     }
 }
-#endif
 
 void LevelSelect_Draw_Fade(void)
 {
@@ -250,10 +247,9 @@ void LevelSelect_State_Init(void)
                         case UITEXT_ALIGN_CENTER: break;
 
                         case UITEXT_ALIGN_RIGHT: self->stageIDLabels[i] = labelR;
-#if MANIA_USE_PLUS
+// -ONLYPOSTPLUSVERSION Removed the if Mania Plus Statement since this Mod uses a Post Mania Plus Version with the DLC off if not used -Gdmc5
                             if (!labelR->data0 && labelR->data1 == 15)
                                 self->pinballLabel = labelR;
-#endif
                             break;
                     }
                 }
@@ -335,9 +331,8 @@ void LevelSelect_State_Navigate(void)
 
         if (self->timer == 1) {
             LevelSelect_SetLabelHighlighted(false);
-#if MANIA_USE_PLUS
+// -ONLYPOSTPLUSVERSION Removed the if Mania Plus Statement since this Mod uses a Post Mania Plus Version with the DLC off if not used -Gdmc5
             if (--self->labelID == 28 && !API.CheckDLC(DLC_PLUS))
-#endif
                 --self->labelID;
 
             if (self->labelID < 0)
@@ -351,9 +346,8 @@ void LevelSelect_State_Navigate(void)
         if (self->timer == 1) {
             LevelSelect_SetLabelHighlighted(false);
 
-#if MANIA_USE_PLUS
+// -ONLYPOSTPLUSVERSION Removed the if Mania Plus Statement since this Mod uses a Post Mania Plus Version with the DLC off if not used -Gdmc5
             if (++self->labelID == 28 && !API.CheckDLC(DLC_PLUS))
-#endif
                 ++self->labelID;
 
             if (self->labelID == self->labelCount)
@@ -384,20 +378,17 @@ void LevelSelect_State_Navigate(void)
     }
     else if (confirmPress || ControllerInfo->keyStart.press) {
         if (self->labelID < self->labelCount - 1 || ControllerInfo->keyStart.press) {
-#if MANIA_USE_PLUS
+// -ONLYPOSTPLUSVERSION Removed the if Mania Plus Statement and else Code since this Mod uses a Post Mania Plus Version with the DLC off if not used -Gdmc5
             if (self->labelID != 28 || API.CheckDLC(DLC_PLUS))
                 LevelSelect_HandleNewStagePos();
             else
                 RSDK.PlaySfx(LevelSelect->sfxFail, false, 255);
-#else
-            LevelSelect_HandleNewStagePos();
-#endif
         }
         else {
             EntityMusic *track = RSDK_GET_ENTITY(self->soundTestID + LevelSelect->startMusicID, Music);
             Music_PlayTrackPtr(track);
 
-#if MANIA_USE_PLUS
+// -ONLYPOSTPLUSVERSION Removed the if Mania Plus Statement since this Mod uses a Post Mania Plus Version with the DLC off if not used -Gdmc5
             self->offsetUFO = self->soundTestID % 14;
             self->offsetBSS = self->soundTestID & 0x1F;
             for (int32 i = 0; i < 8; ++i) {
@@ -412,73 +403,9 @@ void LevelSelect_State_Navigate(void)
                     }
                 }
             }
-#endif
         }
     }
-#if GAME_VERSION == VER_100
-    else if (TouchInfo->count) {
-
-        self->timer = (self->timer + 1) & 0xF;
-        if (self->timer == 1) {
-            int32 selectedLabel = -1;
-
-            int32 labelID = self->labelCount - 1;
-            for (int32 l = 0; l < self->labelCount; ++l, labelID--) {
-                EntityUIText *label = self->zoneNameLabels[labelID];
-
-                if (label && labelID != self->labelID) {
-                    int32 xOff = 5 * (label->text.length * 0.5);
-
-                    for (int32 f = 0; f < TouchInfo->count; ++f) {
-                        float tx = TouchInfo->x[f] * ScreenInfo->size.x;
-                        float ty = TouchInfo->y[f] * ScreenInfo->size.y;
-
-                        if (tx > ((label->position.x >> 16) - xOff) && tx < (xOff + (label->position.x >> 16))) {
-                            if (ty < ((label->position.y >> 16) + 10) && ty > ((label->position.y >> 16) - 10))
-                                selectedLabel = labelID;
-                        }
-                    }
-                }
-            }
-
-            if (selectedLabel == -1) {
-                labelID = self->labelCount - 1;
-                for (int32 l = 0; l < self->labelCount; ++l) {
-                    EntityUIText *label = self->stageIDLabels[labelID];
-
-                    if (label && labelID != self->labelID) {
-                        int32 xOff = 5 * (label->text.length * 0.5);
-
-                        for (int32 f = 0; f < TouchInfo->count; ++f) {
-                            float tx = TouchInfo->x[f] * ScreenInfo->size.x;
-                            float ty = TouchInfo->y[f] * ScreenInfo->size.y;
-
-                            if (tx > ((label->position.x >> 16) - xOff) && tx < (xOff + (label->position.x >> 16))) {
-                                if (ty < ((label->position.y >> 16) + 10) && ty > ((label->position.y >> 16) - 10))
-                                    selectedLabel = labelID;
-                            }
-                        }
-                    }
-                    labelID--;
-                }
-            }
-
-            for (int32 f = 0; f < TouchInfo->count; ++f) {
-                float tx = TouchInfo->x[f] * ScreenInfo->size.x;
-                float ty = TouchInfo->y[f] * ScreenInfo->size.y;
-
-                if (tx > 250.0 && ty > 170.0 && tx < 310.0 && ty < 230.0)
-                    LevelSelect_HandleNewStagePos();
-            }
-
-            if (selectedLabel != -1) {
-                LevelSelect_SetLabelHighlighted(false);
-                self->labelID = selectedLabel;
-                LevelSelect_SetLabelHighlighted(true);
-            }
-        }
-    }
-#endif
+// -REMOVEDPREPLUSV1.0 Removed Game Version 1.0 if Statement and Code since the Code is Unneeded in my Mod since my Mod takes place Post Mania Plus -Gdmc5
     else {
         self->timer = 0;
     }
@@ -531,7 +458,7 @@ void LevelSelect_ManagePlayerIcon(void)
 
         case LSELECT_PLAYER_KNUCKLES: player1->animator.frameID = self->leaderCharacterID; break;
 
-#if MANIA_USE_PLUS
+// -ONLYPOSTPLUSVERSION Removed the if Mania Plus Statement since this Mod uses a Post Mania Plus Version with the DLC off if not used -Gdmc5
         case LSELECT_PLAYER_MIGHTY:
         case LSELECT_PLAYER_RAY:
             if (!API.CheckDLC(DLC_PLUS))
@@ -539,7 +466,6 @@ void LevelSelect_ManagePlayerIcon(void)
 
             player1->animator.frameID = self->leaderCharacterID;
             break;
-#endif
 
         default:
             self->leaderCharacterID   = LSELECT_PLAYER_SONIC;
@@ -655,14 +581,13 @@ void LevelSelect_HandleNewStagePos(void)
         RSDK.SetScene(buffer, "");
         SceneInfo->listPos += curLabel->data0;
 
-#if MANIA_USE_PLUS
+// -ONLYPOSTPLUSVERSION Removed the if Mania Plus Statement since this Mod uses a Post Mania Plus Version with the DLC off if not used -Gdmc5
         if (self->labelID == self->labelCount - 4)
             SceneInfo->listPos += self->offsetUFO;
         else if (self->labelID == self->labelCount - 3)
             SceneInfo->listPos += self->offsetBSS;
         else if (globals->gameMode == MODE_ENCORE)
             SceneInfo->listPos = Zone_GetListPos_EncoreMode();
-#endif
 
         int32 leaderID = 0;
         if (self->leaderCharacterID > 0)

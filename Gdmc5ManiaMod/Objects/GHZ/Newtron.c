@@ -73,8 +73,16 @@ void Newtron_Create(void *data)
 
 void Newtron_StageLoad(void)
 {
-    if (RSDK.CheckSceneFolder("GHZ"))
+    if (RSDK.CheckSceneFolder("GHZ")) {
         Newtron->aniFrames = RSDK.LoadSpriteAnimation("GHZ/Newtron.bin", SCOPE_STAGE);
+	}
+	// Added in More Zones to the Code for the New Zones -Gdmc5
+    else if (RSDK.CheckSceneFolder("TZ1") || RSDK.CheckSceneFolder("TZ2") || RSDK.CheckSceneFolder("TZ3") || RSDK.CheckSceneFolder("TZ4") || RSDK.CheckSceneFolder("TZ5")) {
+        Newtron->aniFrames = RSDK.LoadSpriteAnimation("TZ/Newtron.bin", SCOPE_STAGE);
+	}
+    else {
+		Newtron->aniFrames = RSDK.LoadSpriteAnimation("DZ/Newtron.bin", SCOPE_STAGE);
+	}
 
     Newtron->hitboxShoot.left   = -12;
     Newtron->hitboxShoot.top    = -14;
@@ -323,7 +331,17 @@ void Newtron_EditorDraw(void)
 
 void Newtron_EditorLoad(void)
 {
-    Newtron->aniFrames = RSDK.LoadSpriteAnimation("GHZ/Newtron.bin", SCOPE_STAGE);
+	// Added in a if Check for GHZ for the EditorLoad State to be able to Load in Other Animations and Sprites for Other Zones in the Newtron Badnik -Gdmc5
+	if (RSDK.CheckSceneFolder("GHZ")) {
+        Newtron->aniFrames = RSDK.LoadSpriteAnimation("GHZ/Newtron.bin", SCOPE_STAGE);
+	}
+	// Added in More Zones to the Code for the New Zones -Gdmc5
+    else if (RSDK.CheckSceneFolder("TZ1") || RSDK.CheckSceneFolder("TZ2") || RSDK.CheckSceneFolder("TZ3") || RSDK.CheckSceneFolder("TZ4") || RSDK.CheckSceneFolder("TZ5")) {
+        Newtron->aniFrames = RSDK.LoadSpriteAnimation("TZ/Newtron.bin", SCOPE_STAGE);
+	}
+    else {
+	    Newtron->aniFrames = RSDK.LoadSpriteAnimation("DZ/Newtron.bin", SCOPE_STAGE);
+	}
 
     RSDK_ACTIVE_VAR(Newtron, type);
     RSDK_ENUM_VAR("Shoot", NEWTRON_SHOOT);

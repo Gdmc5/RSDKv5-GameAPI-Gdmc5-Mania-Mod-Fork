@@ -85,6 +85,8 @@
 #include "Cutscene/FXTrail.c"
 #include "Cutscene/FXWaveRing.c"
 #include "Cutscene/RubyPortal.c"
+// Added in a New Object for Dummy Zone -Gdmc5
+#include "DZ/DZSetup.c"
 #include "ERZ/ERZGunner.c"
 #include "ERZ/ERZKing.c"
 #include "ERZ/ERZMystic.c"

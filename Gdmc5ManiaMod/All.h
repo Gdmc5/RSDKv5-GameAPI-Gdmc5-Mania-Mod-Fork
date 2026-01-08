@@ -241,6 +241,9 @@ typedef struct ObjectDrillerdroidO ObjectDrillerdroidO;
 typedef struct EntityDrillerdroidO EntityDrillerdroidO;
 typedef struct ObjectDust ObjectDust;
 typedef struct EntityDust EntityDust;
+// Added in a New Object for Dummy Zone -Gdmc5
+typedef struct ObjectDZSetup ObjectDZSetup;
+typedef struct EntityDZSetup EntityDZSetup;
 typedef struct ObjectE3MenuSetup ObjectE3MenuSetup;
 typedef struct EntityE3MenuSetup EntityE3MenuSetup;
 typedef struct ObjectEggJanken ObjectEggJanken;

@@ -91,6 +91,18 @@ void Splats_StageLoad(void)
 
         Splats->initialState = Splats_State_InkJarSpawner;
     }
+	// Added in More Zones to the Code for the New Zones -Gdmc5
+    else if (RSDK.CheckSceneFolder("TZ1") || RSDK.CheckSceneFolder("TZ2") || RSDK.CheckSceneFolder("TZ3") || RSDK.CheckSceneFolder("TZ4") || RSDK.CheckSceneFolder("TZ5")) {
+	    Splats->aniFrames = RSDK.LoadSpriteAnimation("TZ/Splats.bin", SCOPE_STAGE);
+		
+		Splats->initialState = Splats_State_BounceAround;
+	}
+	else {
+		Splats->aniFrames = RSDK.LoadSpriteAnimation("DZ/Splats.bin", SCOPE_STAGE);
+		
+		Splats->initialState = Splats_State_BounceAround;
+	}
+
 
     Splats->hitboxBadnikGHZ.left   = -10;
     Splats->hitboxBadnikGHZ.top    = -20;
@@ -419,10 +431,19 @@ void Splats_EditorDraw(void)
 
 void Splats_EditorLoad(void)
 {
-    if (RSDK.CheckSceneFolder("GHZ"))
+    if (RSDK.CheckSceneFolder("GHZ")) {
         Splats->aniFrames = RSDK.LoadSpriteAnimation("GHZ/Splats.bin", SCOPE_STAGE);
-    else if (RSDK.CheckSceneFolder("PSZ1"))
+	}
+    else if (RSDK.CheckSceneFolder("PSZ1")) {
         Splats->aniFrames = RSDK.LoadSpriteAnimation("PSZ1/Splats.bin", SCOPE_STAGE);
+	}
+	// Added in More Zones to the Code for the New Zones -Gdmc5
+    else if (RSDK.CheckSceneFolder("TZ1") || RSDK.CheckSceneFolder("TZ2") || RSDK.CheckSceneFolder("TZ3") || RSDK.CheckSceneFolder("TZ4") || RSDK.CheckSceneFolder("TZ5")) {
+        Splats->aniFrames = RSDK.LoadSpriteAnimation("TZ/Splats.bin", SCOPE_STAGE);
+	}
+    else {
+		Splats->aniFrames = RSDK.LoadSpriteAnimation("DZ/Splats.bin", SCOPE_STAGE);
+	}
 
     RSDK_ACTIVE_VAR(Splats, direction);
     RSDK_ENUM_VAR("Left", FLIP_NONE);

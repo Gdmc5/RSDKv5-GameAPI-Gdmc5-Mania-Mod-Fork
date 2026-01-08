@@ -3,7 +3,7 @@
 
 #include "Game.h"
 
-#if !MANIA_USE_PLUS
+// Added this Object to Post Mania Plus by Removing the if not Mania Plus Statement -Gdmc5
 // Object Class
 struct ObjectE3MenuSetup {
     RSDK_OBJECT
@@ -58,4 +58,4 @@ void E3MenuSetup_ActionCB_Knux(void);
 void E3MenuSetup_State_FadeOut(void);
 #endif
 
-#endif //! OBJ_E3MENUSETUP_H
+//! OBJ_E3MENUSETUP_H

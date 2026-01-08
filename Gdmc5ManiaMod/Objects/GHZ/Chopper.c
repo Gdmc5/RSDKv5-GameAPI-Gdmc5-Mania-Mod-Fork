@@ -41,8 +41,16 @@ void Chopper_Create(void *data)
 
 void Chopper_StageLoad(void)
 {
-    if (RSDK.CheckSceneFolder("GHZ"))
+    if (RSDK.CheckSceneFolder("GHZ")) {
         Chopper->aniFrames = RSDK.LoadSpriteAnimation("GHZ/Chopper.bin", SCOPE_STAGE);
+	}
+	// Added in More Zones to the Code for the New Zones -Gdmc5
+    else if (RSDK.CheckSceneFolder("TZ1") || RSDK.CheckSceneFolder("TZ2") || RSDK.CheckSceneFolder("TZ3") || RSDK.CheckSceneFolder("TZ4") || RSDK.CheckSceneFolder("TZ5")) {
+        Chopper->aniFrames = RSDK.LoadSpriteAnimation("TZ/Chopper.bin", SCOPE_STAGE);
+	}
+    else {
+		Chopper->aniFrames = RSDK.LoadSpriteAnimation("DZ/Chopper.bin", SCOPE_STAGE);
+	}
 
     Chopper->hitboxJump.left   = -10;
     Chopper->hitboxJump.top    = -20;
@@ -309,7 +317,17 @@ void Chopper_EditorDraw(void)
 
 void Chopper_EditorLoad(void)
 {
-    Chopper->aniFrames = RSDK.LoadSpriteAnimation("GHZ/Chopper.bin", SCOPE_STAGE);
+	// Added in a if Check for GHZ for the EditorLoad State to be able to Load in Other Animations and Sprites for Other Zones in the Chopper Badnik -Gdmc5
+	if (RSDK.CheckSceneFolder("GHZ")) {
+        Chopper->aniFrames = RSDK.LoadSpriteAnimation("GHZ/Chopper.bin", SCOPE_STAGE);
+	}
+	// Added in More Zones to the Code for the New Zones -Gdmc5
+    else if (RSDK.CheckSceneFolder("TZ1") || RSDK.CheckSceneFolder("TZ2") || RSDK.CheckSceneFolder("TZ3") || RSDK.CheckSceneFolder("TZ4") || RSDK.CheckSceneFolder("TZ5")) {
+        Chopper->aniFrames = RSDK.LoadSpriteAnimation("TZ/Chopper.bin", SCOPE_STAGE);
+	}
+    else {
+		Chopper->aniFrames = RSDK.LoadSpriteAnimation("DZ/Chopper.bin", SCOPE_STAGE);
+	}
 
     RSDK_ACTIVE_VAR(Chopper, type);
     RSDK_ENUM_VAR("Jump", CHOPPER_JUMP);

@@ -4,6 +4,7 @@
 // Object Author: Christian Whitehead/Simon Thomley/Hunter Bridges
 // Decompiled by: Rubberduckycooly & RMGRich
 // ---------------------------------------------------------------------
+// Removed many if #MANIA_USE_PLUS statements for Non Encore DLC Features
 
 #include "Game.h"
 #include <time.h>
@@ -27,9 +28,7 @@ void Zone_LateUpdate(void)
 
         // Handle Time Overs
         if (SceneInfo->minutes == 10
-#if MANIA_USE_PLUS
             && !(globals->medalMods & MEDAL_NOTIMEOVER)
-#endif
         ) {
             SceneInfo->minutes      = 9;
             SceneInfo->seconds      = 59;
@@ -37,17 +36,13 @@ void Zone_LateUpdate(void)
             SceneInfo->timeEnabled  = false;
             RSDK.PlaySfx(Player->sfxHurt, false, 0xFF);
 
-#if MANIA_USE_PLUS
             EntityCompetitionSession *session = CompetitionSession_GetSession();
-#endif
 
             foreach_active(Player, player)
             {
                 bool32 canDie = true;
-#if MANIA_USE_PLUS
                 if (globals->gameMode == MODE_COMPETITION && (session->finishState[player->playerID]) == FINISHTYPE_PASSEDSIGNPOST)
                     canDie = false;
-#endif
                 if (!player->sidekick && canDie)
                     player->deathType = PLAYER_DEATH_DIE_USESFX;
             }
@@ -56,11 +51,9 @@ void Zone_LateUpdate(void)
             StateMachine_Run(Zone->timeOverCallback);
         }
 
-#if MANIA_USE_PLUS
         // You took an hour to beat the stage... no time bonus for you!
         if (SceneInfo->minutes == 59 && SceneInfo->seconds == 59)
             ActClear->disableTimeBonus = true;
-#endif
 
         // Player Draw order sorting
         // Ensure P1 is always on top
@@ -94,12 +87,15 @@ void Zone_StaticUpdate(void)
         Zone->ringFrame &= 0xF;
     }
 
-#if MANIA_USE_PLUS
     // Handle times for the summary screen
     int32 zone = Zone_GetZoneID();
 
-    if (zone >= ZONE_AIZ)
+	// Added in more Zones to this check so Changed how it gets Angel Island Zone's Id some -Gdmc5
+    if (zone = ZONE_AIZ)
         zone = ZONE_AIZ;
+	// Added in Dummy Zone to this Check -Gdmc5
+	else if (zone >= ZONE_DZ)
+		zone = ZONE_DZ;
     else if (zone == ZONE_INVALID)
         return;
 
@@ -110,7 +106,6 @@ void Zone_StaticUpdate(void)
     int32 pos = act + 2 * zone;
     if (pos >= 0 && SceneInfo->timeEnabled && globals->gameMode < MODE_TIMEATTACK)
         ++SaveGame_GetSaveRAM()->zoneTimes[pos];
-#endif
 }
 
 void Zone_Draw(void)
@@ -192,9 +187,7 @@ void Zone_StageLoad(void)
     Zone->fgLayer[0] = RSDK.GetTileLayerID("FG Low");
     Zone->fgLayer[1] = RSDK.GetTileLayerID("FG High");
     Zone->moveLayer  = RSDK.GetTileLayerID("Move");
-#if MANIA_USE_PLUS
     Zone->scratchLayer = RSDK.GetTileLayerID("Scratch");
-#endif
 
     // Layer Masks
 
@@ -347,6 +340,20 @@ int32 Zone_GetZoneID(void)
     if (RSDK.CheckSceneFolder("AIZ") && globals->gameMode == MODE_ENCORE)
         return ZONE_AIZ;
 #endif
+    // Added in Code for the New Zones -Gdmc5
+	if (RSDK.CheckSceneFolder("TZ1"))
+		return ZONE_TZ1;
+	if (RSDK.CheckSceneFolder("TZ2"))
+		return ZONE_TZ2;
+	if (RSDK.CheckSceneFolder("TZ3"))
+		return ZONE_TZ3;
+	if (RSDK.CheckSceneFolder("TZ4"))
+		return ZONE_TZ4;
+	if (RSDK.CheckSceneFolder("TZ5"))
+		return ZONE_TZ5;
+	if (RSDK.CheckSceneFolder("DZ"))
+		return ZONE_DZ;
+	
     return ZONE_INVALID;
 }
 
@@ -699,7 +706,11 @@ bool32 Zone_IsZoneLastAct(void)
              || RSDK.CheckSceneFolder("ERZ")) {
         return true;
     }
-
+	// Added in New Code to Check if it is the Last Act of the New Zones -Gdmc5
+    else if ((RSDK.CheckSceneFolder("TZ1") && Zone->actID == 2) || (RSDK.CheckSceneFolder("TZ2") && Zone->actID == 2) || (RSDK.CheckSceneFolder("TZ3") && Zone->actID == 2)
+             || (RSDK.CheckSceneFolder("TZ4") && Zone->actID == 2) || (RSDK.CheckSceneFolder("TZ5") && Zone->actID == 2) || (RSDK.CheckSceneFolder("DZ") && Zone->actID == 2)) {
+	    return true;
+    }
     return false;
 }
 

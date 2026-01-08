@@ -6,15 +6,15 @@
 // =========================
 
 typedef enum {
-#if !MANIA_USE_PLUS
+// Added No Save Mode Enum Type to Post Plus Mania by Removing the #if !MANIA_USE_PLUS Statement for the Media Demo and E3 Demo Menus to not Save the Game -Gdmc5
     MODE_NOSAVE,
-#endif
     MODE_MANIA, // officially called "MODE_SAVEGAME" in pre-plus, but it's easier to re-use names lol
 #if MANIA_USE_PLUS
     MODE_ENCORE,
 #endif
     MODE_TIMEATTACK,
     MODE_COMPETITION,
+	// Added in a Boss Attack Mode Enum Type -Gdmc5
 	MODE_BOSSATTACK,
 } GameModes;
 
@@ -27,6 +27,11 @@ typedef enum {
     ID_MIGHTY = 1 << 3,
     ID_RAY    = 1 << 4,
 #endif
+	// Added in New Player Character ID's for New Playable Characters -Gdmc5
+	// Added in an Test Player Character -Gdmc5
+	ID_TEST = 1 << 5,
+	// Added in an Template Dummy Player Character -Gdmc5
+	ID_DUMMY = 1 << 6,
     ID_TAILS_ASSIST    = ID_TAILS << 8,
     ID_KNUCKLES_ASSIST = ID_KNUCKLES << 8, // custom-added, can be used to check if "& knux" is active
     ID_DEFAULT_PLAYER  = ID_SONIC | ID_TAILS_ASSIST,
@@ -75,16 +80,20 @@ typedef enum {
 } SceneFilters;
 #endif
 
-#if MANIA_USE_PLUS
+// Moved the #if MANIA_USE_PLUS down in the Variables to have these FILTER Variables and DLC_PLUS Game DLC Variable in Non Mania Plus Mode.
+// but block out Encore Mode Filter Variable to Mania Plus Mode -Gdmc5
 typedef enum {
     // Mania-Specific filter uses
+	#if MANIA_USE_PLUS
     FILTER_BOTH   = FILTER_SLOT1,
+	#endif
     FILTER_MANIA  = FILTER_SLOT2,
+	#if MANIA_USE_PLUS
     FILTER_ENCORE = FILTER_SLOT3,
+	#endif
 } ManiaFilters;
 
 typedef enum { DLC_PLUS } GameDLC;
-#endif
 
 typedef enum {
     PLANEFILTER_NONE,
@@ -141,14 +150,12 @@ typedef enum {
     SLOT_DIALOG_BUTTONS      = 23,
     SLOT_DIALOG_BUTTON2      = 24,
     SLOT_DIALOG_BUTTON3      = 25,
-#if MANIA_USE_PLUS
     SLOT_POPOVER           = 26,
     SLOT_POPOVER_UICONTROL = 27,
     SLOT_POPOVER_BUTTONS   = 28,
     SLOT_POPOVER_BUTTON2   = 29,
     SLOT_POPOVER_BUTTON3   = 30,
     SLOT_POPOVER_BUTTON4   = 31,
-#endif
     SLOT_BIGBUBBLE_P1 = 32,
     SLOT_BIGBUBBLE_P2 = 33,
 #if MANIA_USE_PLUS
@@ -181,6 +188,7 @@ typedef enum {
     PRESENCE_TA,
     PRESENCE_COMP,
     PRESENCE_TITLE,
+	// Added in A Boss Attack Mode Presence Type -Gdmc5
 	PRESENCE_BA,
 } PresenceTypes;
 

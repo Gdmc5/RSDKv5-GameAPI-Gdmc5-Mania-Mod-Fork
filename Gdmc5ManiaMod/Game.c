@@ -3,6 +3,7 @@
 // -------------------------
 // ENGINE VARIABLES
 // -------------------------
+// Removed Pre Plus Mode from the Code -Gdmc5
 
 RSDKFunctionTable RSDK;
 #if MANIA_USE_PLUS
@@ -13,7 +14,7 @@ ModFunctionTable Mod;
 
 DLLExport ModVersionInfo modInfo = { RETRO_REVISION, GAME_VERSION, RETRO_MOD_LOADER_VER };
 
-const char *modID = "Gdmc5ManiaMod";
+const char *modID = "Gdmc5'sUnnamedManiaMod";
 #endif
 
 int32 RSDKRevision = RETRO_REVISION;
@@ -98,34 +99,6 @@ void LinkGameLogicDLL(EngineInfo *info)
 
     InitGameLogic();
 }
-#else
-void LinkGameLogicDLL(EngineInfo info)
-{
-    // Actual params are:
-    // void LinkGameLogicDLL(void *functionTable, RSDKGameInfo *gameInfo, RSDKSceneInfo *sceneInfo, RSDKControllerState *controllerInfo,
-    //                       RSDKAnalogState *stickInfoL, RSDKTouchInfo *touchInfo, RSDKScreenInfo *screenInfo)
-    // But by passing EngineInfo by value we can create a sorta "container" for it, to keep things consistent & easy to manage
-
-    memset(&RSDK, 0, sizeof(RSDKFunctionTable));
-
-    if (info.functionTable)
-        memcpy(&RSDK, info.functionTable, sizeof(RSDKFunctionTable));
-
-#if RETRO_USE_MOD_LOADER
-    if (info.modTable)
-        memcpy(&Mod, info.modTable, sizeof(ModFunctionTable));
-#endif
-
-    GameInfo         = info.gameInfo;
-    SceneInfo        = info.sceneInfo;
-    ControllerInfo   = info.controllerInfo;
-    AnalogStickInfoL = info.stickInfoL;
-    TouchInfo        = info.touchInfo;
-    ScreenInfo       = info.screenInfo;
-
-    InitGameLogic();
-}
-#endif
 
 // This is actually part of "LinkGameLogicDLL" but since we have 2 versions of it, its easier to use shared code this way
 void InitGameLogic(void)
@@ -149,6 +122,7 @@ void InitGameLogic(void)
     RSDK_REGISTER_OBJECT(AnimalHBH);
     RSDK_REGISTER_OBJECT(Animals);
     RSDK_REGISTER_OBJECT(Announcer);
+	// Removed Some Pre Plus Objects from the Mod Object Register List -Gdmc5
     //RSDK_REGISTER_OBJECT(APICallback);
     RSDK_REGISTER_OBJECT(Aquis);
     RSDK_REGISTER_OBJECT(Armadiloid);
@@ -257,7 +231,9 @@ void InitGameLogic(void)
     RSDK_REGISTER_OBJECT(Drillerdroid);
     RSDK_REGISTER_OBJECT(DrillerdroidO);
     RSDK_REGISTER_OBJECT(Dust);
-    RSDK_REGISTER_OBJECT(E3MenuSetup);
+	// Added in a New Object for Dummy Zone -Gdmc5
+	RSDK_REGISTER_OBJECT(DZSetup);
+    //RSDK_REGISTER_OBJECT(E3MenuSetup);
     RSDK_REGISTER_OBJECT(EggJanken);
     RSDK_REGISTER_OBJECT(EggJankenPart);
     RSDK_REGISTER_OBJECT(EggLoco);

@@ -96,6 +96,19 @@ void Decoration_StageLoad(void)
         Decoration->aniFrames = RSDK.LoadSpriteAnimation("Phantom/Decoration.bin", SCOPE_STAGE);
     else if (RSDK.CheckSceneFolder("AIZ"))
         Decoration->aniFrames = RSDK.LoadSpriteAnimation("AIZ/Decoration.bin", SCOPE_STAGE);
+	// Added in More Zones to the Code for the New Zones -Gdmc5
+	else if (RSDK.CheckSceneFolder("TZ1"))
+		Decoration->aniFrames = RSDK.LoadSpriteAnimation("TZ1/Decoration.bin", SCOPE_STAGE);
+	else if (RSDK.CheckSceneFolder("TZ2"))
+		Decoration->aniFrames = RSDK.LoadSpriteAnimation("TZ2/Decoration.bin", SCOPE_STAGE);
+	else if (RSDK.CheckSceneFolder("TZ3"))
+		Decoration->aniFrames = RSDK.LoadSpriteAnimation("TZ3/Decoration.bin", SCOPE_STAGE);
+	else if (RSDK.CheckSceneFolder("TZ4"))
+		Decoration->aniFrames = RSDK.LoadSpriteAnimation("TZ4/Decoration.bin", SCOPE_STAGE);
+	else if (RSDK.CheckSceneFolder("TZ5"))
+		Decoration->aniFrames = RSDK.LoadSpriteAnimation("TZ5/Decoration.bin", SCOPE_STAGE);
+	else
+		Decoration->aniFrames = RSDK.LoadSpriteAnimation("DZ/Decoration.bin", SCOPE_STAGE);
 }
 
 void Decoration_DrawSprite(void)
